@@ -1,11 +1,11 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <iomanip>
 #include <Windows.h>
 
-void fileToHex(const char* filename) {
+void fileToHex(const std::wstring& filename) {
     //Открываем файл с заданным именем в бинарном режиме
     std::ifstream file(filename, std::ios::binary);
     //Если файл не открылся, то просто иди нахуй :D
@@ -25,7 +25,7 @@ void fileToHex(const char* filename) {
         hex << "0x" << std::setw(2) << static_cast<int>(buffer[i]) << ",";
     }
     //Создаем файл с расширением ".txt" и записываем в него содержимое объекта hex
-    std::ofstream hexFile(std::string(filename) + ".txt");
+    std::ofstream hexFile(std::wstring(filename) + L".txt");
     hexFile << hex.str();
     hexFile.close();
     //Копируем hex byte в буфер обмена
@@ -43,12 +43,14 @@ void fileToHex(const char* filename) {
         CloseClipboard();
     }
 }
-int main() {
-    //Запрашиваем имя файла, путь или просто перетащить
-    std::cout << "Enter filename: ";
-    std::string filename;
-    std::getline(std::cin, filename);
-    //Вызываем функцию для конвертации файла в шестнадцатеричное значение в формате Hex Byte 0xXX,0xXX
-    fileToHex(filename.c_str());
+
+int wmain(int argc, wchar_t* argv[]) {
+    if (argc != 2) {
+        std::wcerr << L"Usage: " << argv[0] << L" <filename>\n";
+        return 1;
+    }
+    std::wstring filename(argv[1]);
+    //Вызываем функцию для конвертации файла в шестнадцатеричное представление в формате Hex Byte 0xXX,0xXX
+    fileToHex(filename);
     return 0;
 }
