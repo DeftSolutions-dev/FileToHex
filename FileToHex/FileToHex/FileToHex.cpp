@@ -48,7 +48,7 @@ int main() {
     std::cout << "Enter filename: ";
     std::string filename;
     std::getline(std::cin, filename);
-    //Вызываем функцию для конвертации файла в шестнадцатеричное представление в формате Hex Byte 0xXX,0xXX
+    //Вызываем функцию для конвертации файла в шестнадцатеричное значение в формате Hex Byte 0xXX,0xXX
     fileToHex(filename.c_str());
     return 0;
 }
