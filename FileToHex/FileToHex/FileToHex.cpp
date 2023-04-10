@@ -44,7 +44,7 @@ void fileToHex(const char* filename) {
     }
 }
 int main() {
-    //Запрашиваем у имя файла, путь или просто перетащить
+    //Запрашиваем имя файла, путь или просто перетащить
     std::cout << "Enter filename: ";
     std::string filename;
     std::getline(std::cin, filename);
